@@ -1,0 +1,1 @@
+go get -u -d -v github.com/google/uuid
