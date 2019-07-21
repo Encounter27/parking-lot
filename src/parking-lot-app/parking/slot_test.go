@@ -1,6 +1,7 @@
 package parking
 
 import (
+	"encoding/json"
 	"reflect"
 	"testing"
 )
@@ -33,6 +34,42 @@ func Test_createSlot(t *testing.T) {
 			}
 			if got != nil && got.GetType() != tt.args.t {
 				t.Errorf("Input slot type = %v, slot created of type %v", tt.args.t, got.GetType())
+			}
+		})
+	}
+}
+
+func TestSlotType_UnmarshalJSON(t *testing.T) {
+	var slotType SlotType
+
+	b0, _ := json.Marshal(string("DEFAULT"))
+	b1, _ := json.Marshal(string("TWO_WHEELER"))
+	b2, _ := json.Marshal(string("FOUR_WHEELER"))
+	b3, _ := json.Marshal(string("BIG_VEHIHLE"))
+	b4, _ := json.Marshal(string("TotalSlotTypes"))
+
+	slotType.UnmarshalJSON(b0)
+
+	type args struct {
+		b []byte
+	}
+	tests := []struct {
+		name    string
+		s       *SlotType
+		args    args
+		wantErr bool
+	}{
+		{"Unmarshal to DEFAULT type", &slotType, args{b: b0}, false},
+		{"Unmarshal to TWO_WHEELER type", &slotType, args{b: b1}, false},
+		{"Unmarshal to FOUR_WHEELER type", &slotType, args{b: b2}, false},
+		{"Unmarshal to BIG_VEHIHLE type", &slotType, args{b: b3}, false},
+		{"Check error", &slotType, args{b: []byte("random")}, true},
+		{"Unmarshal to invalid type", &slotType, args{b: b4}, true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := tt.s.UnmarshalJSON(tt.args.b); (err != nil) != tt.wantErr {
+				t.Errorf("SlotType.UnmarshalJSON() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}

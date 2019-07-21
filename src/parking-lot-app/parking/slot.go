@@ -1,6 +1,9 @@
 package parking
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type SlotType int
 
@@ -13,6 +16,29 @@ const (
 	BIG_VEHIHLE    SlotType = 3
 	TotalSlotTypes SlotType = 4
 )
+
+func (s *SlotType) UnmarshalJSON(b []byte) error {
+	var str string
+	if err := json.Unmarshal(b, &str); err != nil {
+		return err
+	}
+
+	switch str {
+	default:
+		return fmt.Errorf("%v is not a valid parking slot type", s)
+	case "DEFAULT":
+		*s = DEFAULT
+	case "TWO_WHEELER":
+		*s = TWO_WHEELER
+	case "FOUR_WHEELER":
+		*s = FOUR_WHEELER
+
+	case "BIG_VEHIHLE":
+		*s = BIG_VEHIHLE
+	}
+
+	return nil
+}
 
 type iSlot interface {
 	GetType() SlotType

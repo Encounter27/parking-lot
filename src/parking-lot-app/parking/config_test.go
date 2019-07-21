@@ -20,7 +20,7 @@ func TestGetSimpleParkingConfig(t *testing.T) {
 }
 
 func TestGetMultiFloorParkingConfig(t *testing.T) {
-	tmp := `{"parking_name": "phoenix mall parking","floors":[{"total":6,"space":[{"from":1,"to":6,"type":"DEFAULT"}]}]}`
+	tmp := `{"parking_name": "phoenix mall parking","floors":[{"total":6,"space":[{"from":1,"to":6,"type":"TWO_WHEELER"}]}]}`
 	cfg1 := GetMultiFloorParkingConfig(tmp)
 	var cfg2 Config
 	json.Unmarshal([]byte(tmp), &cfg2)
