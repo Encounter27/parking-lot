@@ -30,3 +30,12 @@ step 5: [Optional]
     [parking_lot]$ ./dev_setup.sh
 
     It will be helpful to explore the code using vscode IDE, as this will enable the intelligence of vscode for Go.
+
+[please note] I have changed a bit the fuctional spec command, to read from file.
+
+ pty = PTY.spawn("parking_lot < #{File.join(File.dirname(__FILE__), '..', 'fixtures', 'file_input.txt')}")
+                              ^
+                              |
+
+                        Without this redirect operator the executable will not be able to read from file.
+
