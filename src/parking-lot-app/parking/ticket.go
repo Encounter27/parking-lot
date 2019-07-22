@@ -3,11 +3,11 @@ package parking
 import "time"
 import "github.com/google/uuid"
 
-type Status int
+type TicketStatus int
 
 const (
-	ACTIVE Status = 0
-	PAID   Status = 1
+	ACTIVE TicketStatus = 0
+	PAID   TicketStatus = 1
 )
 
 type Ticket struct {
@@ -17,6 +17,6 @@ type Ticket struct {
 	Slot        int // Which spot
 	EntryTime   time.Time
 	ExitTime    time.Time
-	State       Status
+	State       TicketStatus
 	Charge      int
 }

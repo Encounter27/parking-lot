@@ -30,6 +30,22 @@ func print(resp []string) {
 }
 
 func main() {
+	// line := "create_parking_lot 2"
+	// fields := strings.Fields(line)
+	// fmt.Printf("Fields: %q\n", fields)
+
+	// if cmd, err := all.Get(fields[0]); err == nil {
+	// 	resp, err := cmd.Execute(fields)
+	// 	if err != nil {
+	// 		fmt.Println(err)
+
+	// 	} else {
+	// 		print(resp)
+	// 	}
+	// } else {
+	// 	fmt.Println(err)
+	// }
+
 	snr := bufio.NewScanner(os.Stdin)
 	for {
 		snr.Scan()
@@ -37,6 +53,7 @@ func main() {
 		if len(line) == 0 || line == "exit" {
 			break
 		}
+		//line = "park KA-01-HH-1234 White"
 		fields := strings.Fields(line)
 		//fmt.Printf("Fields: %q\n", fields)
 

@@ -42,38 +42,59 @@ func (s *SlotType) UnmarshalJSON(b []byte) error {
 
 type iSlot interface {
 	GetType() SlotType
+	GetVehicle() IVehicle
 }
 
 type slot struct {
-	Type SlotType
+	Vehicle IVehicle
+	Type    SlotType
 }
 
 func (s slot) GetType() SlotType {
 	return s.Type
 }
 
+func (s slot) GetVehicle() IVehicle {
+	return s.Vehicle
+}
+
 type slotTwoWheeler struct {
-	Type SlotType
+	Vehicle IVehicle
+	Type    SlotType
 }
 
 func (s slotTwoWheeler) GetType() SlotType {
 	return s.Type
 }
 
+func (s slotTwoWheeler) GetVehicle() IVehicle {
+	return s.Vehicle
+}
+
 type slotFourWheeler struct {
-	Type SlotType
+	Vehicle IVehicle
+	Type    SlotType
 }
 
 func (s slotFourWheeler) GetType() SlotType {
 	return s.Type
 }
 
+func (s slotFourWheeler) GetVehicle() IVehicle {
+	return s.Vehicle
+}
+
 type slotBigVehicle struct {
-	Type SlotType
+	Vehicle IVehicle
+	Type    SlotType
 }
 
 func (s slotBigVehicle) GetType() SlotType {
 	return s.Type
+}
+
+func (s slotBigVehicle) GetVehicle() IVehicle {
+	return s.Vehicle
 }
 
 func createSlot(t SlotType) (iSlot, error) {
