@@ -15,7 +15,7 @@ var allCommands collection
 func CreateCollection() collection {
 
 	once.Do(func() { // atomic, does not allow repeating
-		allCommands = make(collection) // thread safe
+		allCommands = make(collection)
 	})
 
 	return allCommands

@@ -21,10 +21,31 @@ func Test_createFloorPlan(t *testing.T) {
 			t.Errorf("Created total slot = %v, want %v", len(floor.spot)-1, 2)
 		}
 	})
+}
 
-	// tmp := `{"parking_name": "phoenix mall parking","floors":[{"total":2,"space":[{"from":1,"to":2,"type":"DEFAULT"}]}]}`
-	// var cfg1 Config
-	// json.Unmarshal([]byte(tmp), &cfg)
+func Test_floor_getNearestAvaibleSlot(t *testing.T) {
+	tmp := `{"parking_name": "phoenix mall parking","floors":[{"total":2,"space":[{"from":1,"to":2,"type":"DEFAULT"}]}]}`
+	var cfg Config
+	json.Unmarshal([]byte(tmp), &cfg)
 
-	// floor, err := createFloorPlan(cfg.Floors[0])
+	floor, _ := createFloorPlan(cfg.Floors[0])
+
+	t.Run("Get nearest slots", func(t *testing.T) {
+		for i := 1; i <= 2; i++ {
+			c := floor.getNearestAvaibleSlot(DEFAULT)
+			if c != i {
+				t.Errorf("Created total slot = %v, want %v", c, i)
+			}
+		}
+
+		c := floor.getNearestAvaibleSlot(DEFAULT)
+		if c != 0 {
+			t.Errorf("Created total slot = %v, want %v", c, 0)
+		}
+
+		c = floor.getNearestAvaibleSlot(TWO_WHEELER)
+		if c != 0 {
+			t.Errorf("Created total slot = %v, want %v", c, 0)
+		}
+	})
 }
