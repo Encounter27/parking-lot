@@ -1,0 +1,8 @@
+example_id                       | status | run_time        |
+-------------------------------- | ------ | --------------- |
+./spec/end_to_end_spec.rb[1:1:1] | passed | 0.05139 seconds |
+./spec/end_to_end_spec.rb[1:1:2] | passed | 12.11 seconds   |
+./spec/parking_lot_spec.rb[1:1]  | passed | 0.82182 seconds |
+./spec/parking_lot_spec.rb[1:2]  | passed | 1.13 seconds    |
+./spec/parking_lot_spec.rb[1:3]  | passed | 1.42 seconds    |
+./spec/parking_lot_spec.rb[1:4]  | passed | 2.03 seconds    |

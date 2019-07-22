@@ -95,6 +95,11 @@ func AssignTicket(parkingName string, car IVehicle) (Ticket, error) {
 		return t, fmt.Errorf("Parking with name %s doesn't exists", parkingName)
 	}
 
+	resp, _ := GetSlotNoByReg(parkingName, car.GetRegNO())
+	if resp[0] != "Not found" {
+		return t, fmt.Errorf("Car with registration no %s is already parked at slot %s", car.GetRegNO(), resp[0])
+	}
+
 	st := getSlotType(car.GetType())
 	var slotNo int
 	fc := 0

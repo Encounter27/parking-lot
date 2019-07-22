@@ -23,6 +23,8 @@ func TestCreateCollection(t *testing.T) {
 			t.Errorf("CreateCollection() = %v, want %v", all1, all2)
 		}
 	})
+
+	allCommands = make(collection)
 }
 
 func Test_collection_RegisterCommand(t *testing.T) {
@@ -41,6 +43,8 @@ func Test_collection_RegisterCommand(t *testing.T) {
 			t.Errorf("collection.RegisterCommand() error = %v expectedError %v", err, expectedError)
 		}
 	})
+
+	allCommands = make(collection)
 }
 
 func Test_collection_Get(t *testing.T) {
@@ -69,4 +73,6 @@ func Test_collection_Get(t *testing.T) {
 			t.Errorf("collection.Get() error = %v expectedError = %v", err, expectedError)
 		}
 	})
+
+	allCommands = make(collection)
 }
