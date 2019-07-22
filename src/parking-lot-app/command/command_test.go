@@ -41,6 +41,10 @@ func TestCreateParkingLot_Execute(t *testing.T) {
 }
 
 func TestPark_Execute(t *testing.T) {
+	c := new(CreateParkingLot)
+	arg := []string{"create_parking_lot", "6"}
+	c.Execute(arg)
+
 	type args struct {
 		args []string
 	}
@@ -48,27 +52,32 @@ func TestPark_Execute(t *testing.T) {
 		name    string
 		c       *Park
 		args    args
-		want    []string
 		wantErr bool
 	}{
-		// TODO: Add test cases.
+		{
+			"Park",
+			&Park{},
+			args{args: []string{"park", "KA-01-HH-1234", "White"}},
+			false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			c := &Park{}
-			got, err := c.Execute(tt.args.args)
+			_, err := c.Execute(tt.args.args)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Park.Execute() error = %v, wantErr %v", err, tt.wantErr)
 				return
-			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Park.Execute() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
 func TestLeave_Execute(t *testing.T) {
+	c := new(CreateParkingLot)
+	arg := []string{"create_parking_lot", "6"}
+	c.Execute(arg)
+
 	type args struct {
 		args []string
 	}
@@ -76,27 +85,32 @@ func TestLeave_Execute(t *testing.T) {
 		name    string
 		c       *Leave
 		args    args
-		want    []string
 		wantErr bool
 	}{
-		// TODO: Add test cases.
+		{
+			"Park",
+			&Leave{},
+			args{args: []string{"leave", "1"}},
+			false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			c := &Leave{}
-			got, err := c.Execute(tt.args.args)
+			_, err := c.Execute(tt.args.args)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Leave.Execute() error = %v, wantErr %v", err, tt.wantErr)
 				return
-			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Leave.Execute() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
 func TestStatus_Execute(t *testing.T) {
+	c := new(CreateParkingLot)
+	arg := []string{"create_parking_lot", "6"}
+	c.Execute(arg)
+
 	type args struct {
 		args []string
 	}
@@ -104,27 +118,36 @@ func TestStatus_Execute(t *testing.T) {
 		name    string
 		c       *Status
 		args    args
-		want    []string
 		wantErr bool
 	}{
-		// TODO: Add test cases.
+		{
+			"status",
+			&Status{},
+			args{args: []string{"status"}},
+			false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			c := &Status{}
-			got, err := c.Execute(tt.args.args)
+			_, err := c.Execute(tt.args.args)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Status.Execute() error = %v, wantErr %v", err, tt.wantErr)
 				return
-			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Status.Execute() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
 func TestGetRegNumbers_Execute(t *testing.T) {
+	c := new(CreateParkingLot)
+	arg := []string{"create_parking_lot", "6"}
+	c.Execute(arg)
+
+	p := new(Park)
+	arg = []string{"park", "PP-01-HH-1234", "White"}
+	p.Execute(arg)
+
 	type args struct {
 		args []string
 	}
@@ -135,7 +158,13 @@ func TestGetRegNumbers_Execute(t *testing.T) {
 		want    []string
 		wantErr bool
 	}{
-		// TODO: Add test cases.
+		{
+			"GetRegNumbers",
+			&GetRegNumbers{},
+			args{args: []string{"registration_numbers_for_cars_with_colour", "White"}},
+			[]string{"PP-01-HH-1234"},
+			false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -153,6 +182,14 @@ func TestGetRegNumbers_Execute(t *testing.T) {
 }
 
 func TestGetSlotNumbers_Execute(t *testing.T) {
+	c := new(CreateParkingLot)
+	arg := []string{"create_parking_lot", "6"}
+	c.Execute(arg)
+
+	p := new(Park)
+	arg = []string{"park", "PX-01-HH-123&", "White"}
+	p.Execute(arg)
+
 	type fields struct {
 		QueryBy int
 	}
@@ -163,23 +200,30 @@ func TestGetSlotNumbers_Execute(t *testing.T) {
 		name    string
 		fields  fields
 		args    args
-		want    []string
 		wantErr bool
 	}{
-		// TODO: Add test cases.
+		{
+			"GetSlotNumbers",
+			fields{QueryBy: BY_COLOR},
+			args{args: []string{"slot_numbers_for_cars_with_colour", "White"}},
+			false,
+		},
+		{
+			"GetSlotNumbers",
+			fields{QueryBy: BY_VEHICLE_NO},
+			args{args: []string{"slot_numbers_for_cars_with_colour", "White"}},
+			false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			c := &GetSlotNumbers{
 				QueryBy: tt.fields.QueryBy,
 			}
-			got, err := c.Execute(tt.args.args)
+			_, err := c.Execute(tt.args.args)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("GetSlotNumbers.Execute() error = %v, wantErr %v", err, tt.wantErr)
 				return
-			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("GetSlotNumbers.Execute() = %v, want %v", got, tt.want)
 			}
 		})
 	}

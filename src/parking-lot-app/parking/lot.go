@@ -127,6 +127,7 @@ func AssignTicket(parkingName string, car IVehicle) (Ticket, error) {
 	t.Charge = 0
 
 	// Ticket can be store for audit purpouse or history management
+	// Will be usefull to calculate fare
 
 	return t, nil
 }
@@ -142,6 +143,10 @@ func FreeParkingSlot(parkingName string, floorNo int, slotNo int) error {
 	}
 
 	car := parking.floors[floorNo].spot[slotNo].GetVehicle()
+	if car == nil {
+		return nil
+	}
+
 	parking.floors[floorNo].spot[slotNo] = nil
 	heap.Push(parking.floors[floorNo].available[getSlotType(car.GetType())], slotNo)
 
