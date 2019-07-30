@@ -1,3 +1,7 @@
+Usecase Diagram:
+
+![alt text](https://user-images.githubusercontent.com/8401256/62156123-ff4f6300-b327-11e9-959b-260e95b7a0c2.png)
+
 step 1: system should have go installed.
 
 step2: install direnv
