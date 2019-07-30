@@ -5,7 +5,7 @@ step2: install direnv
 
     OR set the GOPATH manually from root directory
 
-    [parking_lot]$ export GOPATH="/home/corporate-plan/SharedWithWindows/GitRepo/parking_lot"
+    [parking_lot]$ export GOPATH=$(pwd)
 
 step3: run the bin/setup
     [parking_lot]$ ./bin/setup
@@ -39,3 +39,4 @@ step 5: [Optional]
 
                         Without this redirect operator the executable will not be able to read from file.
 
+Also please use the make file at the root directory to build, run and run-unit tests.
